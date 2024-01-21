@@ -122,22 +122,21 @@ Add a catchy title to your project. Something that people immediately know what 
       4. Upon clicking on de-zoomcamp, it should be successfully connected. The termal will show conda actived
           
 # Week 1  
-  ## Docker + Postgres  
-    - Introduction to Docker  
-      * What is Docker?  
-        Docker is a set of Platform as a service products that use OS-level virtualization to deliver software in packages called 
+  ## Docker + Postgres
+  * __1.2.1 - Introduction to Docker Introduction to Docker__  
+    - What is Docker?  
+      Docker is a set of Platform as a service products that use OS-level virtualization to deliver software in packages called 
         containers.
-      * Why should DE care about docker?  
-        1. Reproducability- The project can be bundled as image and deployed to docker.  
+    - Why should DE care about docker?  
+      1. Reproducability- The project can be bundled as image and deployed to docker.  
            It can then be run on different platforms, like AWS, Google cloud (Kubernetes)
-        2. Local Experiments 
-        3. Integration Tests (CI/CD) - Making sure connections are successfully established and expected results at the end of 
+      2. Local Experiments 
+      3. Integration Tests (CI/CD) - Making sure connections are successfully established and expected results at the end of 
            pipeline run are validated. e.g. count of rows expected in postgres are same as retrieved from it after pipeline execution.
-      * Hands On:  
-        1. Created Dockerfile to make docker python image install pandas everytime it is run.  
-        2. Added pipeline.py file to use sys.argv, for reading the parameters passed to docker run cmd.  
-           e.g   docker run -it test:pandas 2024-01-21, it uses the date as argv[1] and prints it.
-           3.
+    - Hands on:  
+      1. Created Dockerfile to make docker python image install pandas everytime it is run.  
+      2. Added pipeline.py file to use sys.argv, for reading the parameters passed to docker run cmd.  
+         e.g   docker run -it test:pandas 2024-01-21, it uses the date as argv[1] and prints it.
       
 
 
