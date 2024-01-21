@@ -133,7 +133,11 @@ Add a catchy title to your project. Something that people immediately know what 
         2. Local Experiments 
         3. Integration Tests (CI/CD) - Making sure connections are successfully established and expected results at the end of 
            pipeline run are validated. e.g. count of rows expected in postgres are same as retrieved from it after pipeline execution.
-        4. 
+      * Hands On:  
+        1. Created Dockerfile to make docker python image install pandas everytime it is run.  
+        2. Added pipeline.py file to use sys.argv, for reading the parameters passed to docker run cmd.  
+           e.g   docker run -it test:pandas 2024-01-21, it uses the date as argv[1] and prints it.
+           3.
       
 
 
