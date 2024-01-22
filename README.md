@@ -137,6 +137,11 @@ Add a catchy title to your project. Something that people immediately know what 
       1. Created Dockerfile to make docker python image install pandas everytime it is run.  
       2. Added pipeline.py file to use sys.argv, for reading the parameters passed to docker run cmd.  
          e.g   docker run -it test:pandas 2024-01-21, it uses the date as argv[1] and prints it.
+  * __1.2.2 - Ingesting NY Taxi Data to Postgres__
+  * __1.2.3 - Connecting pgAdmin and Postgres__  
+  * __1.2.4 - Dockerizing the Ingestion Script__  
+
+
       
 
 
