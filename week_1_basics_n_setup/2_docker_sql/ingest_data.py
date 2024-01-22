@@ -15,13 +15,12 @@ def main(params):
     db = params.db
     table_name = params.table_name
     csv_name = 'yellow_tripdata_2021-01.csv.gz'
+    url = params.url
 
     # download the csv
-    # os.system(f"wget {url} -O {csv_name}")
+    os.system(f"wget {url} -O {csv_name}")
 
-    engine = create_engine('postgresql://root:root@localhost:5432/ny_taxi')
-
-    # df = pd.read_csv('yellow_tripdata_2021-01.csv.gz', compression='gzip', nrows=100)
+    engine = create_engine(f'postgresql://{user}:{password}@{host}:{port}/{db}')
 
     df_iter = pd.read_csv(csv_name, compression='gzip',iterator=True, chunksize=100000)
     df = next(df_iter)
@@ -50,7 +49,7 @@ if __name__ == '__main__':
     parser.add_argument('--port', help="port for postgres")
     parser.add_argument('--db', help="database for postgres")
     parser.add_argument('--table_name', help="table-name for postgres")
-    # parser.add_argument('url', help="url for postgres")
+    parser.add_argument('--url', help="url for postgres")
 
     args = parser.parse_args()
     main(args)
