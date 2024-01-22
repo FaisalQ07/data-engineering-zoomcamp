@@ -37,3 +37,13 @@ docker run -it \
 dpage/pgadmin4 
 
   docker run -it -e PGADMIN_DEFAULT_EMAIL="admin@admin.com" -e PGADMIN_DEFAULT_PASSWORD="root" -p 808:80 --network=pg-network --name pgadmin dpage/pgadmin4
+
+
+
+python ingest_data.py \
+  --user=root \
+  --password=root \
+  --host=localhost \
+  --port=5432 \
+  --db=ny_taxi \
+  --table_name=yellow_taxi_data
