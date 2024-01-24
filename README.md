@@ -141,6 +141,12 @@ Add a catchy title to your project. Something that people immediately know what 
   * __1.2.3 - Connecting pgAdmin and Postgres__  
   * __1.2.4 - Dockerizing the Ingestion Script__  
 
+  ## GCP
+  * __Introduction to GCP (Google Cloud Platform)__
+  
+  ## Terraform
+  * __Introduction Terraform: Concepts and Overview__
+  * __Terraform Basics: Simple one file Terraform Deployment__
 
       
 
