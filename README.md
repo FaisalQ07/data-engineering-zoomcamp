@@ -222,8 +222,9 @@ Add a catchy title to your project. Something that people immediately know what 
       2. Create file main.tf . Also, install extension 'Hashicorp Terraform'
       3. Copy the terraform template for [__Google Cloud Platform Provider__](https://registry.terraform.io/providers/hashicorp/google/latest/docs), in the main.tf
       4. Change the project option under provider to your project ID for GCP project __terraform-demo__
-      5. Add the credentials option under provider, the value is the complete path to the json file __/terrademo/keys/my-creds.json__
-      6. on terminal hit cmd: __terraform init__ to access the GCP resource using credentials configured in file __main.tf__
+      5. Add the credentials option under provider, the value is the complete path to the json file __/terrademo/keys/my-creds.json__.  
+        For project __ny-rides-faisal__, use `GOOGLE_APPLICATION_CREDENTIALS <*path_to_the_key.json*>` from the terminal instead of adding credentials in the file __main.tf__ 
+      6. on terminal hit cmd: __terraform init__ to access the GCP resource using credentials configured in file __main.tf__ or using the GOOGLE_APPLICATION_CREDENTIALS variable.
       7. Add the terraform template for creating google storage bucket from [__google_storage_bucket__](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_bucket), in the __main.tf__ under __Google Cloud Platform Provider__
       8. Notice the line `resource "google_storage_bucket" "auto-expire"`. It defines the resource that we want to create.  
          In our case, its google storage bucket. "auto-expire" is the name of the action you want to perform on the resource.  
