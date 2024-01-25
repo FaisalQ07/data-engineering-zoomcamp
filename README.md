@@ -140,6 +140,99 @@ Add a catchy title to your project. Something that people immediately know what 
   * __1.2.2 - Ingesting NY Taxi Data to Postgres__
   * __1.2.3 - Connecting pgAdmin and Postgres__  
   * __1.2.4 - Dockerizing the Ingestion Script__  
+    - Convert notebook upload-data to python script:  
+      1. From the subfolder, *../2_docker_sql/*, Use cmd: `jupyter nbconvert --to=script upload_data.ipynb`
+      2. Rename the script `upload-data.py` to `ingest_data.py`
+      3. Parametrize the script `ingest_data.py` using argparse to pass following variables as args:  
+         *user, password, host, port, database, tablename, url from where we download the csv*
+      4. Test it using cmd:
+         `python ingest_data.py    
+            --user=root   
+            --password=root  
+            --host=localhost 
+            --port=5432 
+            --db=ny_taxi 
+            --table_name=yellow_taxi_data 
+            --url="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2021-01.csv.gz"`
+      5. Build a docker image using cmd `docker build -t taxi_ingest:v001 .`
+      6. Run it on the network `pg-network`, on which postgres and PgAdmin are running in the docker.  
+         Use cmd: `docker run -it 
+                      --network=pg-network 
+                      taxi_ingest:v001  
+                        --user=root  
+                        --password=root  
+                        --host=pg-database  
+                        --port=5432  
+                        --db=ny_taxi  
+                        --table_name=yellow_taxi_data  
+                        --url="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2021-01.csv.gz"`
+  * __1.2.5 - Running Postgres and pgAdmin with Docker-Compose__
+    - Configuration of postgres database and pgadmin in Docker-Compose file:  
+      1. Create file `docker-compose.yaml` under *__./2_docker_sql__*
+      2. Populate the servicees and networks section for postgres and pgadmin
+    - Running the Docker-Compose file:  
+      1. Run it usin cmd `docker-compose up`. Make sure to run it from the directory containing the file docker-compose.yaml
+    - Connecting to pgadmin and configuration:  
+      1. Open pgadmin on port 8080, login and connect to pg-database to check if database ny_taxi exists
+  * __1.2.6 - SQL Refreshser__
+    - Demonstrated some sql queries to cover topics like joins, groupby, orderby. No new learning or addition to codebase
+
+  ## GCP
+  * __1.1.1 - Introduction to Google Cloud Platform__
+  ## Terraform
+  * __1.3.1 - Terraform Primer__  
+    - What is Terraform?  
+      HashiCorp Terraform is an infrastructure as code tool that lets you define both cloud and on-prem resources in human-readable configuration files that you can version, reuse, and share. You can then use a consistent workflow to provision and manage all of your infrastructure throughout its lifecycle. 
+    - Why Terraform?
+      * Simplicity in keeping track of infrastructure -  
+        By defining it in file, you can read it and see whats going to be made with what params.
+      * Easier collaboration -  
+        People can look at it, make additions and push changes that can be deployed to infrastructure.
+      * Reproducability 
+      * Ensure resources are removed -  
+        Once built and tested, you can bring down the resources when not needed, to avoid extra charges
+      * Architecture  
+        ![terraform architecture](./week_1_basics_n_setup/2_docker_sql/images/terraform.png)
+      * Key Terraform commands  
+        - Init - Get me the providers I need
+        - Plan - What am i about to do?
+        - APply - Do whats is in the tf (terraform) files
+  * __1.3.2 - Terraform Basics__
+    - Create demo project folder in GCP
+      1. Go to console and create a new project named __terraform-demo__
+    - Create a service account
+      1. Under __IAM % Admin__, click on __Service Accounts__
+      2. Add Service account details, name it __terraform-runner__
+      3. Grant this service account access to:  
+        * Cloud Storage -> Assign role 'Storage Admin'
+        * Compute Engine -> Assign role 'Compute Admin'
+        * BigQuery -> Assign role 'BigQuery Admin'
+    - Create permission keys for Service Account __terraform-runner__
+      1. Under __IAM % Admin__, click on __Service Accounts__
+      2. For the service account seen on screen, click on the 3 dots for Actions, hit __Manage Keys__
+      3. Click __Add Key__, select __Create new key__. Select JSON format
+    - Setup project folder __terrademo__
+      1. Add the downloaded json key file to folder __/terrademo/keys/__, as *my-creds.json*
+      2. Create file main.tf . Also, install extension 'Hashicorp Terraform'
+      3. Copy the terraform template for [__Google Cloud Platform Provider__](https://registry.terraform.io/providers/hashicorp/google/latest/docs), in the main.tf
+      4. Change the project option under provider to your project ID for GCP project __terraform-demo__
+      5. Add the credentials option under provider, the value is the complete path to the json file __/terrademo/keys/my-creds.json__
+      6. on terminal hit cmd: __terraform init__ to access the GCP resource using credentials configured in file __main.tf__
+      7. Add the terraform template for creating google storage bucket from [__google_storage_bucket__](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_bucket), in the __main.tf__ under __Google Cloud Platform Provider__
+      8. Notice the line `resource "google_storage_bucket" "auto-expire"`. It defines the resource that we want to create.  
+         In our case, its google storage bucket. "auto-expire" is the name of the action you want to perform on the resource.  
+         It should be locally unique. We change it to __demo-bucket__
+      9. Under `resource` section, the __name__ config-option should be globally unique.  
+         It can be a combination of projectid-__terra-bucket__ in our case
+      10. Run cmd: __terraform plan__. It shows what the plan is for bucket creation.
+      11. Run cmd: __terraform apply__. It will successfully create the bucket. Verify it using the GCP console.
+      12. To decommission and remove the resources, use cmd: __terraform destroy__. It removes the bucket that was created.
+
+
+
+
+
+      
 
   ## GCP
   * __Introduction to GCP (Google Cloud Platform)__
