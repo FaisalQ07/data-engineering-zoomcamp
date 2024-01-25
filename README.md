@@ -147,6 +147,8 @@ Add a catchy title to your project. Something that people immediately know what 
   ## Terraform
   * __Introduction Terraform: Concepts and Overview__
   * __Terraform Basics: Simple one file Terraform Deployment__
+  * __Deployment with a Variables File__  
+    - __1.3.3 - Terraform Variables__
 
       
 
