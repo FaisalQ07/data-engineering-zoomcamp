@@ -198,11 +198,17 @@ Add a catchy title to your project. Something that people immediately know what 
         - Plan - What am i about to do?
         - APply - Do whats is in the tf (terraform) files
   * __1.3.2 - Terraform Basics__
+    - If using github codespace, install terraform using __wget__.  
+       Make sure to unzip it and move to a directory that is included in your PATH so that you can execute it from any location.  
+       Use the mv command to move the Terraform binary to a directory in your PATH, such as /usr/local/bin. This ensures Terraform is globally accessible `sudo mv terraform /usr/local/bin/`  
+      Verify Installation:  
+        * You can verify that Terraform is installed correctly by running:`terraform version`
     - Create demo project folder in GCP
-      1. Go to console and create a new project named __terraform-demo__
+      1. Go to console and create a new project named __terraform-demo__ .  
+         Or if adding to the project week 1, continue with the project __ny-rides-faisal__
     - Create a service account
       1. Under __IAM % Admin__, click on __Service Accounts__
-      2. Add Service account details, name it __terraform-runner__
+      2. Add Service account details, name it __terraform-runner__ or __terraform__ for prject __ny-rides-faisal__
       3. Grant this service account access to:  
         * Cloud Storage -> Assign role 'Storage Admin'
         * Compute Engine -> Assign role 'Compute Admin'
@@ -212,7 +218,7 @@ Add a catchy title to your project. Something that people immediately know what 
       2. For the service account seen on screen, click on the 3 dots for Actions, hit __Manage Keys__
       3. Click __Add Key__, select __Create new key__. Select JSON format
     - Setup project folder __terrademo__
-      1. Add the downloaded json key file to folder __/terrademo/keys/__, as *my-creds.json*
+      1. Add the downloaded json key file to folder __/terrademo/keys/__, as *my-creds.json*. Make sure to include it in gitignore
       2. Create file main.tf . Also, install extension 'Hashicorp Terraform'
       3. Copy the terraform template for [__Google Cloud Platform Provider__](https://registry.terraform.io/providers/hashicorp/google/latest/docs), in the main.tf
       4. Change the project option under provider to your project ID for GCP project __terraform-demo__
