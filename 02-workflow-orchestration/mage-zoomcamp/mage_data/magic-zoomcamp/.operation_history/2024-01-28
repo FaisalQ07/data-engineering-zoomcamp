@@ -1,0 +1,3 @@
+{"operation": "create", "resource": {"type": "pipeline", "uuid": "great_sky"}, "timestamp": 1706460410, "user": null}
+{"operation": "create", "resource": {"type": "pipeline", "uuid": "charismatic_astronomer"}, "timestamp": 1706461236, "user": null}
+{"operation": "create", "resource": {"type": "pipeline", "uuid": "refined_feather"}, "timestamp": 1706463132, "user": null}
