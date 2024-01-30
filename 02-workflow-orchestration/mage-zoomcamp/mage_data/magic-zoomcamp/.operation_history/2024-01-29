@@ -1,0 +1,3 @@
+{"operation": "create", "resource": {"type": "pipeline", "uuid": "pristine_rune"}, "timestamp": 1706495473, "user": null}
+{"operation": "create", "resource": {"type": "pipeline", "uuid": "melodious_paper"}, "timestamp": 1706547422, "user": null}
+{"operation": "create", "resource": {"type": "pipeline", "uuid": "load_to_gcp_copy"}, "timestamp": 1706554033, "user": null}
