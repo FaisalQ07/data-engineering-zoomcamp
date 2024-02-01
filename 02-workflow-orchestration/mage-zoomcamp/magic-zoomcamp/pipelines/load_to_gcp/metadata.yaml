@@ -90,7 +90,7 @@ settings:
 spark_config: {}
 tags: []
 type: python
-updated_at: '2024-01-29T03:12:46+00:00'
+updated_at: '2024-02-01 17:26:14'
 uuid: load_to_gcp
 variables_dir: /home/src/mage_data/magic-zoomcamp
 widgets: []
