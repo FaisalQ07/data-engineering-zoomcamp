@@ -8,7 +8,7 @@ if 'data_exporter' not in globals():
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/src/ny-rides-faisal-701c4daaae72.json"
 bucket_name = "mage-demo-bucker-zoomcamp-faisal"
 project_id = "ny-rides-faisal"
-table_name = "green_taxi"
+table_name = "green_taxi_20240202"
 root_path = f"{bucket_name}/{table_name}"
 
 @data_exporter
