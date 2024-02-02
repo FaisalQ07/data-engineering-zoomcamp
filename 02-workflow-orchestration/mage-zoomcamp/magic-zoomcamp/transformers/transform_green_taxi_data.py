@@ -26,6 +26,7 @@ def transform(data, *args, **kwargs):
     print("Pssengers with trip distance 0 before processing: ", data['trip_distance'].isin([0]).sum())
     # Create a new column lpep_pickup_date by converting lpep_pickup_datetime to a date
     data['lpep_pickup_date'] = data['lpep_pickup_datetime'].dt.date
+    data['lpep_pickup_date_str'] = data['lpep_pickup_datetime'].apply(lambda x: x.strftime('%Y-%m-%d'))
     data.columns = (
         data.columns
         .str.replace('(?<=[a-z])(?=[A-Z])', '_', regex=True)

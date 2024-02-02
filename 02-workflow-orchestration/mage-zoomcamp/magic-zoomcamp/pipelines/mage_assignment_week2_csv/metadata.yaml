@@ -1,0 +1,137 @@
+blocks:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - transform_green_taxi_data
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: load_data_green_taxi
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_loader
+  upstream_blocks: []
+  uuid: load_data_green_taxi
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - export_greentaxi_to_postgres
+  - export_greentaxi_to__gcs_parquet_partitioned
+  - export_csv_to_gcs
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: transform_green_taxi_data
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - load_data_green_taxi
+  uuid: transform_green_taxi_data
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: export_csv_to_gcs
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - transform_green_taxi_data
+  uuid: export_csv_to_gcs
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    file_source:
+      path: data_exporters/export_greentaxi_to__gcs_parquet_partitioned.py
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: export_greentaxi_to__gcs_parquet_partitioned
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - transform_green_taxi_data
+  uuid: export_greentaxi_to__gcs_parquet_partitioned
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - verify_postgress_load
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: export_greentaxi_to_postgres
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - transform_green_taxi_data
+  uuid: export_greentaxi_to_postgres
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    data_provider: postgres
+    data_provider_profile: dev
+    data_provider_schema: mage
+    data_provider_table: green_taxi
+    dbt: {}
+    disable_query_preprocessing: false
+    export_write_policy: replace
+    limit: 1000
+    use_raw_sql: true
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: verify_postgress_load
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_loader
+  upstream_blocks:
+  - export_greentaxi_to_postgres
+  uuid: verify_postgress_load
+cache_block_output_in_memory: false
+callbacks: []
+concurrency_config: {}
+conditionals: []
+created_at: '2024-01-29 02:31:13.222274+00:00'
+data_integration: null
+description: null
+executor_config: {}
+executor_count: 1
+executor_type: null
+extensions: {}
+name: mage_assignment_week2_csv
+notification_config: {}
+remote_variables_dir: null
+retry_config: {}
+run_pipeline_in_one_process: false
+settings:
+  triggers: null
+spark_config: {}
+tags: []
+type: python
+updated_at: '2024-02-02 22:43:26'
+uuid: mage_assignment_week2_csv
+variables_dir: /home/src/mage_data/magic-zoomcamp
+widgets: []
