@@ -1,0 +1,57 @@
+
+CREATE OR REPLACE EXTERNAL TABLE `ny-rides-faisal.ny_taxi_green_hw.external_green_tripdata`
+OPTIONS (
+  format = 'PARQUET',
+  uris = ['gs://mage-demo-bucker-zoomcamp-faisal/green_taxi_hw3/*.parquet'] 
+);
+
+-- Check green trip data
+SELECT date(PARSE_TIMESTAMP('%Y-%m-%d %H:%M:%S', lpep_pickup_datetime)) as date_column, * FROM ny-rides-faisal.ny_taxi_green_hw.external_green_tripdata limit 10;
+
+
+---Q1: What is count of records for the 2022 Green Taxi Data??
+select count(*) from ny-rides-faisal.ny_taxi_green_hw.external_green_tripdata;
+-- Answer: 840,402
+
+-- Create a non partitioned table from external table
+CREATE OR REPLACE TABLE ny-rides-faisal.ny_taxi_green_hw.green_tripdata_non_partitoned AS
+SELECT * FROM ny-rides-faisal.ny_taxi_green_hw.external_green_tripdata;
+
+--Q2: query to count the distinct number of PULocationIDs for the entire dataset on both the tables
+select distinct pulocation_id from ny-rides-faisal.ny_taxi_green_hw.external_green_tripdata;
+select distinct pulocation_id from ny-rides-faisal.ny_taxi_green_hw.green_tripdata_non_partitoned;
+-- Answer: 0 MB for the External Table and 6.41MB for the Materialized Table
+
+
+--Q3: How many records have a fare_amount of 0?
+select count(*) 
+from ny-rides-faisal.ny_taxi_green_hw.green_tripdata_non_partitoned
+where fare_amount = 0;
+--Answer: 1622
+
+
+
+-- Q4: Create a partitioned table from external table
+CREATE OR REPLACE TABLE ny-rides-faisal.ny_taxi_green_hw.green_tripdata_partitioned
+PARTITION BY date_column
+CLUSTER BY pulocation_id  AS
+SELECT date(PARSE_TIMESTAMP('%Y-%m-%d %H:%M:%S', lpep_pickup_datetime)) as date_column, * FROM ny-rides-faisal.ny_taxi_green_hw.external_green_tripdata;
+
+--Q5: query to retrieve the distinct PULocationID between lpep_pickup_datetime 06/01/2022 and 06/30/2022 (inclusive)
+select distinct pulocation_id 
+from ny-rides-faisal.ny_taxi_green_hw.green_tripdata_non_partitoned
+where lpep_pickup_datetime BETWEEN '2022-06-01' AND '2022-06-30';
+-- Answer: bytes processed - 22.39MB
+
+select distinct pulocation_id 
+from ny-rides-faisal.ny_taxi_green_hw.green_tripdata_partitioned
+where lpep_pickup_datetime BETWEEN '2022-06-01' AND '2022-06-30';
+-- Answer: bytes processed - 1.19MB
+-- Answer closely resembles option 2
+
+--Q6: Where is the data stored in the External Table you created?
+-- Answer: GCP Bucket
+
+--Q7: It is best practice in Big Query to always cluster your data:
+-- Answer: False
+
