@@ -1,0 +1,10 @@
+dev:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: ny-rides-faisal
+      dataset: dbt_taxi_rides_ny
+      location: northamerica-northeast2
+      threads: 1

@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: staging
+    database: ny-rides-faisal 
+    schema: ny_taxi_region_toronto
+
+    tables:
+      - name: external_green_tripdata
+      - name: green_tripdata_partitoned
