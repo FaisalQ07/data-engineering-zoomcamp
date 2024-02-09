@@ -7,4 +7,4 @@ sources:
 
     tables:
       - name: external_green_tripdata
-      - name: green_tripdata_partitoned
+      - name: green_tripdata_non_partitoned

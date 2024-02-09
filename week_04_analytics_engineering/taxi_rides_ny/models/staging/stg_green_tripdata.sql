@@ -29,7 +29,7 @@ select
     cast(total_amount as numeric) as total_amount,
     cast(payment_type as integer) as payment_type, 
 {{ get_payment_type_description("payment_type") }} as payment_type_description
-from {{ source('staging', 'external_green_tripdata') }} 
+from {{ source('staging', 'green_tripdata_non_partitoned') }} 
 
 -- dbt build --select <model_name> --vars '{'is_test_run': 'false'}'
 {% if var('is_test_run', default=true) %}
