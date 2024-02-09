@@ -30,4 +30,10 @@ select
     cast(payment_type as integer) as payment_type, 
 {{ get_payment_type_description("payment_type") }} as payment_type_description
 from {{ source('staging', 'external_green_tripdata') }} 
-limit 100
+
+-- dbt build --select <model_name> --vars '{'is_test_run': 'false'}'
+{% if var('is_test_run', default=true) %}
+
+  limit 100
+
+{% endif %}
