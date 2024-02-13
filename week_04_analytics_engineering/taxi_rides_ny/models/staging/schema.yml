@@ -3,11 +3,12 @@ version: 2
 sources:
   - name: staging
     database: ny-rides-faisal 
-    schema: ny_taxi_region_toronto
+    schema: ny_taxi_hw04
 
     tables:
-      - name: external_green_tripdata
-      - name: green_tripdata_non_partitoned
+      - name: fhv_tripdata_non_partitioned
+      - name: green_tripdata_non_partitioned
+      - name: yellow_tripdata_non_partitioned
 
 models:
     - name: stg_green_tripdata
