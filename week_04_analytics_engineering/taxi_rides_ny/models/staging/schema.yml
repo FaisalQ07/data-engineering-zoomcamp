@@ -3,11 +3,12 @@ version: 2
 sources:
   - name: staging
     database: ny-rides-faisal 
-    schema: ny_taxi_region_toronto
+    schema: ny_taxi_hw04
 
     tables:
-      - name: external_green_tripdata
-      - name: green_tripdata_non_partitoned
+      - name: fhv_tripdata_non_partitioned
+      - name: green_tripdata_non_partitioned
+      - name: yellow_tripdata_non_partitioned
 
 models:
     - name: stg_green_tripdata
@@ -18,14 +19,14 @@ models:
         The records were collected and provided to the NYC Taxi and Limousine Commission (TLC) by
         technology service providers. 
       columns:
-          - name: trip_id
+          - name: tripid
             description: Primary key for this table, generated with a concatenation of vendorid+pickup_datetime
             tests:
                 - unique:
                     severity: warn
                 - not_null:
                     severity: warn
-          - name: vendor_id 
+          - name: vendorid 
             description: > 
                 A code indicating the TPEP provider that provided the record.
                 1= Creative Mobile Technologies, LLC; 
@@ -38,20 +39,20 @@ models:
             description: The number of passengers in the vehicle. This is a driver-entered value.
           - name: Trip_distance 
             description: The elapsed trip distance in miles reported by the taximeter.
-          - name: pulocation_id
+          - name: pickup_locationid
             description: locationid where the meter was engaged.
             tests:
               - relationships:
                   to: ref('taxi_zone_lookup')
                   field: locationid
                   severity: warn
-          - name: dolocation_id 
+          - name: dropoff_locationid 
             description: locationid where the meter was engaged.
             tests:
               - relationships:
                   to: ref('taxi_zone_lookup')
                   field: locationid
-          - name: ratecode_id 
+          - name: ratecodeid 
             description: >
                 The final rate code in effect at the end of the trip.
                   1= Standard rate
