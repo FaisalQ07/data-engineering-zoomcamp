@@ -20,7 +20,7 @@ if 'test' not in globals():
 @data_loader
 def load_data(*args, **kwargs):
     """
-    Template code for loading data from any source.
+    Template code for loading data from any source
 
     Returns:
         Anything (e.g. data frame, dictionary, array, int, str, etc.)
