@@ -14,14 +14,14 @@ dim_zones as (
     select * from {{ ref('dim_zones') }}
     where borough != 'Unknown'
 )
-select green_tripdata.trip_id, 
-    green_tripdata.vendor_id, 
+select green_tripdata.tripid, 
+    green_tripdata.vendorid, 
     green_tripdata.service_type,
-    green_tripdata.ratecode_id, 
-    green_tripdata.pulocation_id, 
+    green_tripdata.ratecodeid, 
+    green_tripdata.pickup_locationid, 
     pickup_zone.borough as pickup_borough, 
     pickup_zone.zone as pickup_zone, 
-    green_tripdata.dolocation_id,
+    green_tripdata.dropoff_locationid,
     dropoff_zone.borough as dropoff_borough, 
     dropoff_zone.zone as dropoff_zone,  
     green_tripdata.pickup_datetime, 
@@ -42,6 +42,6 @@ select green_tripdata.trip_id,
     green_tripdata.payment_type_description
 from green_tripdata
 inner join dim_zones as pickup_zone
-on green_tripdata.pulocation_id = pickup_zone.locationid
+on green_tripdata.pickup_locationid = pickup_zone.locationid
 inner join dim_zones as dropoff_zone
-on green_tripdata.dolocation_id = dropoff_zone.locationid
+on green_tripdata.dropoff_locationid = dropoff_zone.locationid
