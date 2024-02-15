@@ -212,3 +212,5 @@ scratch*
 *.json
 .env
 week_02_workflow_orchestration/mage-zoomcamp/mage_data/magic-zoomcamp/pipelines/week04_anaytics_engineering_hw/.variables/load_taxi_data_from_web/output_0/data.parquet
+
+fhvhv*
